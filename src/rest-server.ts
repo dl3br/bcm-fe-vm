@@ -3,23 +3,23 @@ import * as express from 'express'
 import { Observable } from 'rxjs'
 import { Client } from 'thruway.js'
 // import { config } from '../config'
-import { MinDiff, MinsFromLastBlock } from './types'
+import { Deal, MinsFromLastBlock } from './types'
 
 const config = {
   wamp: {
-    url: 'ws://localhost:8080/ws',
+    localUrl: 'ws://localhost:8080/ws',
     realm: 'realm1',
   },
 }
 
-const wamp = new Client(config.wamp.url, config.wamp.realm)
+const wamp = new Client(config.wamp.localUrl, config.wamp.realm)
 const nReplay = 1
 
-const minDiff$: Observable<MinDiff[]> =
+const deals$: Observable<Deal[]> =
   wamp.topic('com.fee.deals')
     .flatMap(y => y.args)
 
-const minDiffShare$ = minDiff$.shareReplay(nReplay)
+const minDiffShare$ = deals$.shareReplay(nReplay)
 
 const minsFromLastBlock$: Observable<MinsFromLastBlock> =
   wamp.topic('com.fee.minsfromlastblock')
