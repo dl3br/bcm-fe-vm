@@ -1,16 +1,9 @@
 import * as express from 'express'
-// import { minDiff$ } from './fee-estimator'
 import { Observable } from 'rxjs'
 import { Client } from 'thruway.js'
-// import { config } from '../config'
+import { config } from '../config'
 import { Deal, MinsFromLastBlock } from './types'
 
-const config = {
-  wamp: {
-    localUrl: 'ws://localhost:8080/ws',
-    realm: 'realm1',
-  },
-}
 
 const wamp = new Client(config.wamp.localUrl, config.wamp.realm)
 const nReplay = 1
