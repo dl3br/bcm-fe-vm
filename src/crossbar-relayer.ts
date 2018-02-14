@@ -3,7 +3,7 @@ import { Client } from 'thruway.js'
 import { config } from '../config'
 // import { Deal, MinsFromLastBlock } from './types'
 
-const topics = config.wamp.topic
+const topics = config.wamp.topics
 const wampRemote = new Client(config.wamp.remoteUrl, config.wamp.realm)
 const wampLocal = new Client(config.wamp.localUrl, config.wamp.realm)
 
