@@ -7,7 +7,7 @@ import { MinDiff, MinsFromLastBlock } from './types'
 
 const config = {
   wamp: {
-    url: 'ws://159.100.247.219:8080/ws',
+    url: 'ws://localhost:8080/ws',
     realm: 'realm1',
   },
 }
