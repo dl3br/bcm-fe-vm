@@ -7,4 +7,4 @@ const wampLocal = new Client(config.wamp.localUrl, config.wamp.realm)
 
 topics.map(topic => wampRemote.topic(topic)
     .flatMap(y => y.args)
-    .forEach(val$ => wampLocal.publish(topic, val$)))
+    .do(val$ => wampLocal.publish(topic, val$)))
