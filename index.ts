@@ -7,6 +7,6 @@ const options = {
   silent: false,
 }
 
-new (Monitor)('dist/rest-server.js', options)
+new (Monitor)('dist/src/rest-server.js', options)
   .on('exit', () => console.log('rest-server.js has exited after infinity restarts'))
   .start()
