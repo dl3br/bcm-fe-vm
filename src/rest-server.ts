@@ -12,7 +12,7 @@ const deals$: Observable<Deal[]> =
   wamp.topic('com.fee.deals')
     .flatMap(y => y.args)
 
-const minDiffShare$ = deals$.shareReplay(nReplay)
+const dealsShare$ = deals$.shareReplay(nReplay)
 
 const minsFromLastBlock$: Observable<MinsFromLastBlock> =
   wamp.topic('com.fee.minsfromlastblock')
@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 
 app.get(
   '/btc/deals',
-  (_, res) => minDiffShare$
+  (_, res) => dealsShare$
     .take(nReplay)
     .subscribe(
     x => res.send(x),
