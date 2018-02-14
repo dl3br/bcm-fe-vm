@@ -7,10 +7,10 @@ const options = {
   silent: false,
 }
 
-new (Monitor)('dist/src/rest-server.js', options)
+new (Monitor)('src/rest-server.js', options)
   .on('exit', () => console.log('rest-server.js has exited after infinity restarts'))
   .start()
 
-new (Monitor)('dist/src/crossbar-relayer.js', options)
+new (Monitor)('src/crossbar-relayer.js', options)
   .on('exit', () => console.log('crossbar-relayer.js has exited after infinity restarts'))
   .start()
