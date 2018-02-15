@@ -22,7 +22,7 @@ const minsFromLastBlockShare$ = minsFromLastBlock$.shareReplay(nReplay)
 
 const app = express()
 
-app.use((req, res, next) => {
+app.use((_, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
@@ -40,7 +40,7 @@ app.get(
 )
 
 app.get(
-  '/btc/minutes',
+  '/btc/minsfromlastblock',
   (_, res) => minsFromLastBlockShare$
     .take(nReplay)
     .subscribe(
