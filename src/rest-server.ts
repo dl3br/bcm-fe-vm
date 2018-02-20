@@ -9,13 +9,13 @@ const wamp = new Client(config.wamp.localUrl, config.wamp.realm)
 const nReplay = 1
 
 const deals$: Observable<Deal[]> =
-  wamp.topic('com.fee.deals')
+  wamp.topic('com.fee.v1.btc.deals')
     .flatMap(y => y.args)
 
 const dealsShare$ = deals$.shareReplay(nReplay)
 
 const minsFromLastBlock$: Observable<MinsFromLastBlock> =
-  wamp.topic('com.fee.minsfromlastblock')
+  wamp.topic('com.fee.v1.btc.minsfromlastblock')
     .flatMap(y => y.args)
 
 const minsFromLastBlockShare$ = minsFromLastBlock$.shareReplay(nReplay)
