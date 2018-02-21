@@ -37,7 +37,7 @@
             "type": "logical_dns",
             "lb_type": "round_robin",
             "hosts": [{
-                "url": "tcp://185.19.28.15:80"
+                "url": "tcp://185.19.28.15:8081"
             }]
         }]
     }
