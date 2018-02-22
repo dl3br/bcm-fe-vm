@@ -1,8 +1,14 @@
+admin:
+  access_log_path: "/tmp/admin_access.log"
+  address:
+    socket_address:
+      address: 0.0.0.0
+      port_value: 9901
+
 static_resources:
   listeners:
-
-  # front proxy
-  - address:
+  - name: front_proxy
+    address:
       socket_address:
         address: 0.0.0.0
         port_value: 10000
@@ -10,26 +16,26 @@ static_resources:
     - filters:
       - name: envoy.http_connection_manager
         config:
-          codec_type: auto
           stat_prefix: ingress_http
+          codec_type: AUTO
           route_config:
             name: local_route
             virtual_hosts:
-            - name: backend
+            - name: local_service
               domains:
               - "*"
               routes:
               - match:
-                  prefix: "/service/1"
+                  prefix: "/"
                 route:
                   cluster: bcm_nginx
               # - match:
-              #     prefix: "/service/2"
+              #     prefix: "/ws"
               #   route:
               #     cluster: bcm_wamp
           http_filters:
           - name: envoy.router
-            config: {}
+            # config: {}
 
   # # services
   # - address:
@@ -62,35 +68,32 @@ static_resources:
   # front proxy
   - name: bcm_nginx
     connect_timeout: 0.25s
-    type: strict_dns
-    lb_policy: round_robin
-    http2_protocol_options: {}
-    hosts:
-    - socket_address:
-        address: bcm_nginx
-        port_value: 10000
-  # - name: bcm_wamp
-  #   connect_timeout: 0.25s
-  #   type: strict_dns
-  #   lb_policy: round_robin
-  #   http2_protocol_options: {}
-  #   hosts:
-  #   - socket_address:
-  #       address: bcm_wamp
-  #       port_value: 10000
-
-  # services
-  - name: local_service
-    connect_timeout: 0.25s
-    type: strict_dns
-    lb_policy: round_robin
+    type: STRICT_DNS
+    dns_lookup_family: V4_ONLY
+    lb_policy: ROUND_ROBIN
+    # http2_protocol_options: {}
     hosts:
     - socket_address:
         address: 185.19.28.15
         port_value: 8081
-admin:
-  access_log_path: "/tmp/admin_access.log"
-  address:
-    socket_address:
-      address: 0.0.0.0
-      port_value: 9901
+
+  # - name: bcm_wamp
+  #   connect_timeout: 0.25s
+  #   type: STRICT_DNS
+  #   dns_lookup_family: V4_ONLY
+  #   lb_policy: ROUND_ROBIN
+  #   # http2_protocol_options: {}
+  #   hosts:
+  #   - socket_address:
+  #       address: 185.19.28.15
+  #       port_value: 8080
+
+  # services
+  # - name: local_service
+  #   connect_timeout: 0.25s
+  #   type: strict_dns
+  #   lb_policy: round_robin
+  #   hosts:
+  #   - socket_address:
+  #       address: 185.19.28.15
+  #       port_value: 8081
