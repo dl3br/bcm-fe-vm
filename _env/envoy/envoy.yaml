@@ -87,7 +87,7 @@ static_resources:
     hosts:
     - socket_address:
         address: 185.19.28.15
-        port_value: 80
+        port_value: 8081
 admin:
   access_log_path: "/tmp/admin_access.log"
   address:
