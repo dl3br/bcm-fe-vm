@@ -1,4 +1,4 @@
 FROM lyft/envoy:latest
 RUN apt-get update
-COPY envoy.json /etc/envoy.json
-CMD /usr/local/bin/envoy -c /etc/envoy.json --service-cluster samplecluster --service-node sample1
+COPY envoy.yaml /etc/envoy.yaml
+CMD /usr/local/bin/envoy -c /etc/envoy.yaml --service-cluster samplecluster --service-node sample1
