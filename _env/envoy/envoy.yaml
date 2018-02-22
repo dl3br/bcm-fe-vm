@@ -23,10 +23,10 @@ static_resources:
                   prefix: "/service/1"
                 route:
                   cluster: bcm_nginx
-              - match:
-                  prefix: "/service/2"
-                route:
-                  cluster: bcm_wamp
+              # - match:
+              #     prefix: "/service/2"
+              #   route:
+              #     cluster: bcm_wamp
           http_filters:
           - name: envoy.router
             config: {}
@@ -69,15 +69,15 @@ static_resources:
     - socket_address:
         address: bcm_nginx
         port_value: 10000
-  - name: bcm_wamp
-    connect_timeout: 0.25s
-    type: strict_dns
-    lb_policy: round_robin
-    http2_protocol_options: {}
-    hosts:
-    - socket_address:
-        address: bcm_wamp
-        port_value: 10000
+  # - name: bcm_wamp
+  #   connect_timeout: 0.25s
+  #   type: strict_dns
+  #   lb_policy: round_robin
+  #   http2_protocol_options: {}
+  #   hosts:
+  #   - socket_address:
+  #       address: bcm_wamp
+  #       port_value: 10000
 
   # services
   - name: local_service
