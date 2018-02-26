@@ -9,5 +9,5 @@ const data = topics.map(topic => wampRemote.topic(topic)
     .map(y => ({ val: y.args, topic })))
 
 data.map(x => x.subscribe(
-    ({val, topic}) => wampLocal.publish(topic, val)
+    (x) => wampLocal.publish(x.topic, x.val)
 ))
