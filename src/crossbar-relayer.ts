@@ -11,3 +11,5 @@ const data = topics.map(topic => wampRemote.topic(topic)
 data.map(x => x.subscribe(
     (x) => wampLocal.publish(x.topic, x.val)
 ))
+
+wampLocal.topic('keep_socket_alive_hack').subscribe()
