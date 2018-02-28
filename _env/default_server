@@ -49,21 +49,21 @@ server {
 		try_files $uri $uri/ =404;
 	}
 
-  # location /ws {
-  #       # switch off logging
-  #       access_log off;
+  location /ws {
+        # switch off logging
+        access_log off;
 
-  #       # redirect all HTTP traffic to localhost:8080
-  #       proxy_pass http://localhost:8080/ws;
-  #       proxy_set_header X-Real-IP $remote_addr;
-  #       proxy_set_header Host $host;
-  #       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        # redirect all HTTP traffic to localhost:8080
+        proxy_pass http://localhost:8080/ws;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 
-  #       # WebSocket support (nginx 1.4)
-  #       proxy_http_version 1.1;
-  #       proxy_set_header Upgrade $http_upgrade;
-  #       proxy_set_header Connection "upgrade";
-  # }
+        # WebSocket support (nginx 1.4)
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+  }
 
  	location /api/v1/btc/deals {
      		proxy_pass http://localhost:3000/btc/deals;
