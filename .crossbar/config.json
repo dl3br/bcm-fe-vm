@@ -44,7 +44,7 @@
             ]
         }],
         "transports": [{
-            "type": "universal",
+            "type": "websocket",
             "endpoint": {
                 "type": "tcp",
                 "port": 8080,
@@ -53,12 +53,7 @@
                     "certificate": "/etc/letsencrypt/live/fees.truelevel.io/fullchain.pem"
                 }
             },
-            "rawsocket": {},
-            "websocket": {
-                "ws": {
-                    "type": "websocket"
-                }
-            }
+            "url": "wss://fees.truelevel.io:8080/ws"
         }]
     }]
 }
