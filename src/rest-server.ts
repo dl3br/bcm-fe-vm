@@ -4,18 +4,25 @@ import { Client } from 'thruway.js'
 import { config } from '../config'
 import { Deal, MinsFromLastBlock } from './types'
 
-
-const wamp = new Client(config.wamp.localUrl, config.wamp.realm)
+const wampLocal = new Client(
+    config.wamp.localUrl,
+    config.wamp.realm,
+    {
+        authmethods: ['wampcra'],
+        role: config.wamp.user,
+        authid: config.wamp.user,
+    }
+)
 const nReplay = 1
 
 const deals$: Observable<Deal[]> =
-  wamp.topic('com.fee.v1.btc.deals')
+  wampLocal.topic('com.fee.v1.btc.deals')
     .flatMap(y => y.args)
 
 const dealsShare$ = deals$.shareReplay(nReplay)
 
 const minsFromLastBlock$: Observable<MinsFromLastBlock> =
-  wamp.topic('com.fee.v1.btc.minsfromlastblock')
+  wampLocal.topic('com.fee.v1.btc.minsfromlastblock')
     .flatMap(y => y.args)
 
 const minsFromLastBlockShare$ = minsFromLastBlock$.shareReplay(nReplay)
