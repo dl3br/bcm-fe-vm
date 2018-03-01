@@ -13,7 +13,7 @@
                     "allow": {
                         "call": false,
                         "register": false,
-                        "publish": true,
+                        "publish": false,
                         "subscribe": true
                     },
                     "disclose": {
@@ -22,7 +22,26 @@
                     },
                     "cache": true
                 }]
-            }]
+            },
+                      {
+                          "name": "relayer",
+                          "permissions": [{
+                              "uri": "",
+                              "match": "prefix",
+                              "allow": {
+                                  "call": false,
+                                  "register": false,
+                                  "publish": true,
+                                  "subscribe": true
+                              },
+                              "disclose": {
+                                  "caller": false,
+                                  "publisher": false
+                              },
+                              "cache": true
+                          }]
+                      }
+                     ]
         }],
         "transports": [{
             "type": "universal",
@@ -33,7 +52,18 @@
             "rawsocket": {},
             "websocket": {
                 "ws": {
-                    "type": "websocket"
+                    "type": "websocket",
+                    "auth": {
+                        "wampcra": {
+                            "type": "static",
+                            "users": {
+                                "relayer": {
+                                    "secret": "ANSIBLE_ME",
+                                    "role": "relayer"
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }]
