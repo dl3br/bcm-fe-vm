@@ -9,16 +9,17 @@ const wampLocal = new Client(
     config.wamp.realm,
     {
         authmethods: ['wampcra'],
-        // role: config.wamp.user,
+        role: config.wamp.user,
         authid: config.wamp.user,
     }
 )
 
 wampLocal.onChallenge(challenge => challenge
-    .map((x) => auth_cra.sign(config.wamp.key, x.extra._challenge)))
+    .map((x) => auth_cra.sign(config.wamp.key, x.extra.challenge)))
 
 topics.map(topic => wampRemote.topic(topic)
     .flatMap(y => y.args)
+    .do(console.dir)
     .forEach(val$ => wampLocal.publish(topic, val$)))
 
 wampLocal.topic('keep_socket_alive_hack').subscribe()
