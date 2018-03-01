@@ -20,6 +20,6 @@ wampLocal.onChallenge(challenge => challenge
 topics.map(topic => wampRemote.topic(topic)
     .flatMap(y => y.args)
     .do(console.dir)
-    .forEach(val$ => wampLocal.publish(topic, val$)))
+    .forEach(val$ => wampLocal.publish(topic, val$, { exclude_me: false, })))
 
 wampLocal.topic('keep_socket_alive_hack').subscribe()

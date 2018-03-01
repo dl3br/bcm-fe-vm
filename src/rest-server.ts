@@ -9,8 +9,8 @@ const wampLocal = new Client(
     config.wamp.realm,
     {
         authmethods: ['wampcra'],
-        role: config.wamp.user,
-        authid: config.wamp.user,
+        role: 'fee_payer',
+        // authid: config.wamp.user,
     }
 )
 const nReplay = 1
