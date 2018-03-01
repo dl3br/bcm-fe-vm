@@ -15,7 +15,7 @@ const wampLocal = new Client(
 )
 
 wampLocal.onChallenge(challenge => challenge
-    .map((x) => auth_cra.sign(config.wamp.key, x.extra.challenge)))
+    .map((x) => auth_cra.sign(config.wamp.key, x.extra._challenge)))
 
 topics.map(topic => wampRemote.topic(topic)
     .flatMap(y => y.args)
