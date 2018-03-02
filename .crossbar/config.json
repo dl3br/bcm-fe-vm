@@ -57,7 +57,7 @@
                             "type": "static",
                             "users": {
                                 "relayer": {
-                                    "secret": "ANSIBLE_ME",
+                                    "secret": "relayer",
                                     "role": "relayer"
                                 }
                             }
