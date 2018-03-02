@@ -6,24 +6,6 @@
         "realms": [{
             "name": "realm1",
             "roles": [{
-                    "name": "fee_payer",
-                    "permissions": [{
-                        "uri": "",
-                        "match": "prefix",
-                        "allow": {
-                            "call": false,
-                            "register": false,
-                            "publish": false,
-                            "subscribe": true
-                        },
-                        "disclose": {
-                            "caller": false,
-                            "publisher": false
-                        },
-                        "cache": true
-                    }]
-                },
-                {
                     "name": "relayer",
                     "permissions": [{
                         "uri": "",
@@ -40,18 +22,35 @@
                         },
                         "cache": true
                     }]
+                },
+                {
+                    "name": "public",
+                    "permissions": [{
+                        "uri": "",
+                        "match": "prefix",
+                        "allow": {
+                            "call": false,
+                            "register": false,
+                            "publish": false,
+                            "subscribe": true
+                        },
+                        "disclose": {
+                            "caller": false,
+                            "publisher": false
+                        },
+                        "cache": true
+                    }]
                 }
             ]
         }],
         "transports": [{
-            "type": "universal",
+            "type": "web",
             "endpoint": {
                 "type": "tcp",
                 "port": 8080
             },
-            "rawsocket": {},
-            "websocket": {
-                "ws": {
+            "paths": {
+                "private": {
                     "type": "websocket",
                     "auth": {
                         "wampcra": {
@@ -64,6 +63,16 @@
                             }
                         }
                     }
+                },
+                "ws": {
+                    "type": "websocket",
+                    "auth": {
+                        "anonymous": {
+                            "type": "static",
+                            "role": "public"
+                        }
+                    }
+
                 }
             }
         }]

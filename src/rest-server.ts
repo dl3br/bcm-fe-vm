@@ -4,15 +4,7 @@ import { Client } from 'thruway.js'
 import { config } from '../config'
 import { Deal, MinsFromLastBlock } from './types'
 
-const wampLocal = new Client(
-    config.wamp.localUrl,
-    config.wamp.realm,
-    {
-        authmethods: ['wampcra'],
-        role: 'fee_payer',
-        // authid: config.wamp.user,
-    }
-)
+const wampLocal = new Client(config.wamp.localUrl, config.wamp.realm)
 const nReplay = 1
 
 const deals$: Observable<Deal[]> =
