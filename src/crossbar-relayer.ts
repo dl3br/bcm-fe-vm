@@ -3,7 +3,19 @@ import { config } from '../config'
 import { auth_cra } from 'autobahn'
 
 const topics = config.wamp.topics
-const wampRemote = new Client(config.wamp.remoteUrl, config.wamp.realm)
+const wampRemote = new Client(
+    config.wamp.remoteUrl,
+    config.wamp.realm,
+    {
+        authmethods: ['wampcra'],
+        role: config.wamp.user,
+        authid: config.wamp.user,
+    }
+)
+
+wampRemote.onChallenge(challenge => challenge
+    .map((x) => auth_cra.sign(config.wamp.key, x.extra.challenge)))
+
 const wampLocal = new Client(
     config.wamp.localUrlPrivate,
     config.wamp.realm,
