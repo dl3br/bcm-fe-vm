@@ -5,7 +5,7 @@ export const config = {
         remoteUrl: 'ws://159.100.240.25:8080/ws',
         realm: 'realm1',
         user: "relayer",
-        key: 'ANSIBLE_ME',
+        key: 'relayer',
         topics: ['com.fee.v1.btc.deals', 'com.fee.v1.btc.minsfromlastblock'],
     }
 }
