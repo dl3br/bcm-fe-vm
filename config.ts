@@ -6,6 +6,6 @@ export const config = {
         realm: 'realm1',
         user: "relayer",
         key: 'relayer',
-        topics: ['com.fee.v1.btc.deals', 'com.fee.v1.btc.minsfromlastblock'],
+        topics: ['com.fee.v1.btc.deals', 'com.fee.v1.btc.minsfromlastblock', 'com.fee.v1.btc.minedtxssummary'],
     }
 }
